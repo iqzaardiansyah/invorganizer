@@ -5,6 +5,8 @@ class Item(models.Model):
     amount = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
     description = models.TextField(default='')
+    class Meta:
+        abstract = True
 
     def __str__(self) :
         return self.name
