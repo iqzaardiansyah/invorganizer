@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from models import Item
 
 def show_main(request):
     context = {
@@ -7,3 +8,7 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
+
+def show_products(request):
+    data = {}
+    return render(request, "main.html", )
