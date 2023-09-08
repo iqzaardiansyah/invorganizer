@@ -1,3 +1,22 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css">
 <h1>InvOrganizer Page</h1>
 
 <h4>Name: {{name}} Class: {{class}}</h4>
+
+<table>
+    <tr>
+        <th><h4>Nama Produk</h4></th>
+        <th><h4>Jumlah Produk</h4></th>
+        <th><h4>Harga Produk</h4></th>
+        <th><h4>Deskripsi Produk</h4></th>
+    </tr>
+    {% for produk in list %}
+    <tr>
+        <td><h4>{{produk.name}}</h4></td>
+        <td><h4>{{produk.amount}}</h4></td>
+        <td><h4>{{produk.price}}</h4></td>
+        <td><h4>{{produk.description}}</h4></td>
+    </tr>
+    {% endfor %}
+</table>
