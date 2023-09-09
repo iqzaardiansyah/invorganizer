@@ -12,7 +12,7 @@ https://invorganizer.adaptable.app/
    - Buka settings.py di dalam direktori invorganizer kemudian tambahkan 'main' dalam list INSTALLED_APPS, import os dan ubah value STATIC_URL menjadi '/static/', dan tambahkan varianbel baru bernama "STATICFILES_DIRS" dengan value "[os.path.join(BASE_DIR, "static"),]". Penambahan kode yang berkaitan dengan static ini berguna agar main.html yang akan menjadi template bisa menggunakan style yang kita buat sendiri menggunakan file css.
    - Buat direktori bernama "static" dan buat file bernama "styles.css".
    - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html".
-   - Tambahkan kode <pre>{% load static %}<pre>dan <pre><link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css"><pre> di main.html agar main.html menggunakan style yang telah dibuat sebelumnya.
+   - Tambahkan kode <pre>{% load static %} <link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css"><pre> di main.html agar main.html menggunakan style yang telah dibuat sebelumnya.
    - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.
    - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.
    - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
