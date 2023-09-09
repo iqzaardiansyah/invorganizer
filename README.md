@@ -15,13 +15,15 @@ https://invorganizer.adaptable.app/
    - Tambahkan kode "{% load static %}" dan 'link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css"' di main.html agar main.html menggunakan style yang telah dibuat sebelumnya.
    - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.
    - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.
-   - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.
+   - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
+     <pre>
      from django.urls import path
      from main.views import show_main
-     app_name = 'main'<br>
-     urlpatterns = [<br>
-        path('', show_main, name='show_main'),<br>
+     app_name = 'main'
+     urlpatterns = [
+        path('', show_main, name='show_main'),
      ]
+     <pre>
    - 
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
