@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q0+fg&$96exu3-vt5nr%-33h#(9qp&&%r_)j!2tto2tm2uk!it
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ['https://invorganizer.adaptable.app/']
+CSRF_ALLOWED_ORIGINS = ['https://invorganizer.adaptable.app/']
+CORS_ORIGINS_WHITELIST = ['https://invorganizer.adaptable.app/']
