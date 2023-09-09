@@ -14,9 +14,8 @@ https://invorganizer.adaptable.app/
    - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html".
    - Tambahkan kode berikut di main.html agar main.html menggunakan style yang telah dibuat sebelumnya.
      <pre>
-        {% load static %} 
-         <link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css">
-      <pre>
+        {% load static %}
+        link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css" <pre>
    - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.
    - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.
    - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
