@@ -127,6 +127,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://invorganizer.adaptable.app/']
-CSRF_ALLOWED_ORIGINS = ['https://invorganizer.adaptable.app/']
-CORS_ORIGINS_WHITELIST = ['https://invorganizer.adaptable.app/']
+CSRF_TRUSTED_ORIGINS = ['https://invorganizer.adaptable.app']
+CSRF_ALLOWED_ORIGINS = ['https://invorganizer.adaptable.app']
+CORS_ORIGINS_WHITELIST = ['https://invorganizer.adaptable.app']
