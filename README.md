@@ -28,7 +28,9 @@ https://invorganizer.adaptable.app/
      ] <pre>
    - Buat Repo baru di github dan salin link HTTPS Repo tersebut.
    - Inisiasi git folder pada direktori project menggunakan CMD dengan kode "git init".
-   - Kemudian hubungkan direktori project dengan Repo yang telah dubuat dengan command "git remote add origin <URL>"
+   - Kemudian hubungkan direktori project dengan Repo yang telah dubuat dengan command "git remote add origin (link HTTPS)".
+   - Push direktori project ke Repo dengan menggunakan mantra git yaitu add, commit, dan push.
+   - Buka website adaptable, sign in, dan buat app baru bernama invorganizer dengan mengikuti langkah-langkah pada tutorial 0.
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
