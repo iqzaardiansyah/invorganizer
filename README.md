@@ -26,7 +26,9 @@ https://invorganizer.adaptable.app/
      urlpatterns = [
         path('', show_main, name='show_main'),
      ] <pre>
-   - alskldklkasd
+   - Buat Repo baru di github dan salin link HTTPS Repo tersebut.
+   - Inisiasi git folder pada direktori project menggunakan CMD dengan kode "git init".
+   - Kemudian hubungkan direktori project dengan Repo yang telah dubuat dengan command "git remote add origin <URL>"
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
