@@ -31,7 +31,8 @@ https://invorganizer.adaptable.app/
    - Buka website adaptable, sign in, dan buat app baru bernama invorganizer dengan mengikuti langkah-langkah pada tutorial 0.
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.<br>
-![bagan](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page/basic-django.png)
+![bagan](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Home_page/basic-django.png)<br>
+Ketika Django mendeteksi adanya HTTP Request, Django akan mencoba untuk mencocokkan URL yang diminta ke daftar URL yang ada di dalam file urls.py. Setiap URL dipetakan ke fungsi tertentu yang ada di dalam file views.py, sehingga ketika URL yang diminta ditemukan, maka fungsi yang terpetakan ke URL tersebut akan dipanggil. Fungsi yang terpetakan ke URL tersebut kemudian mengambil alih penanganan Request dan mengembalikan respons. Request umumnya memerlukan semacam interaksi dengan database, yang diwakili oleh objek yang ditentukan dalam file models.py. Fungsi yang terpetakan ke URL tersebut akan mengambil objek model dari database, dan menyiapkan respons ke klien. Respon ini kemudian ditampilkan di browser klien menggunakan template yang memiliki format HTML.
 
 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?<br>
 Agar dependensi pengembangan proyek bisa terjaga. Salah satu contoh penggunaan virtual environment adalah pengembangan aplikasi berbasis Django. Salah satu keuntungan menggunakan virtual environment dalam pengembangan aplikasi berbasis Django adalah setiap pengembangan bisa menggunakan versi Python yang berbeda-beda tanpa adanya konflik dari versi Python dari virtual environment yang lain. 
