@@ -26,7 +26,7 @@ https://invorganizer.adaptable.app/
      app_name = 'main'
      urlpatterns = [
         path('', show_main, name='show_main'),
-     ]
+     ] <pre>
    - alskldklkasd
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
