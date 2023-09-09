@@ -18,9 +18,9 @@ https://invorganizer.adaptable.app/
    - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.
      from django.urls import path
      from main.views import show_main
-     app_name = 'main'
-     urlpatterns = [
-        path('', show_main, name='show_main'),
+     app_name = 'main'<br>
+     urlpatterns = [<br>
+        path('', show_main, name='show_main'),<br>
      ]
    - 
 
