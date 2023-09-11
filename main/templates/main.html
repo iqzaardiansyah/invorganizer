@@ -1,35 +1,38 @@
-<h1>InvOrganizer Page</h1>
+<html style="color: white;">
+    <h1>InvOrganizer Page</h1>
+    <h4>Name: {{name}} Class: {{class}}</h4>
 
-<h4>Name: {{name}} Class: {{class}}</h4>
-
-<style>
-    table, th, td {
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 1px solid black;
-    border-collapse: collapse;
-    }
-    th, td {
-        background-color: #96D4D4;
-    }
-</style>
-
-<table>
-    <tr>
-        <th><h4>Nama Produk</h4></th>
-        <th><h4>Jumlah Produk</h4></th>
-        <th><h4>Harga Produk</h4></th>
-        <th><h4>Deskripsi Produk</h4></th>
-    </tr>
-    {% for produk in list %}
-    <tr>
-        <td><h4>{{produk.name}}</h4></td>
-        <td><h4>{{produk.amount}}</h4></td>
-        <td><h4>{{produk.price}}</h4></td>
-        <td><h4>{{produk.description}}</h4></td>
-    </tr>
-    {% endfor %}
-</table>
+    <body style="background-color: grey;">
+        <style>
+            table, th, td {
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid white;
+            border-collapse: collapse;
+            }
+            th, td {
+                background-color: grey;
+            }
+        </style>
+    
+        <table>
+            <tr>
+                <th><h4>Nama Produk</h4></th>
+                <th><h4>Jumlah Produk</h4></th>
+                <th><h4>Harga Produk</h4></th>
+                <th><h4>Deskripsi Produk</h4></th>
+            </tr>
+            {% for produk in list %}
+            <tr>
+                <td><h4>{{produk.name}}</h4></td>
+                <td><h4>{{produk.amount}}</h4></td>
+                <td><h4>{{produk.price}}</h4></td>
+                <td><h4>{{produk.description}}</h4></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
 
 
 
