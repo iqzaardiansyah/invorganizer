@@ -4,7 +4,7 @@ https://invorganizer.adaptable.app/
 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
    - Membuat direktori baru (Contoh: "invorganizer").
-   - Inisiasi projek Django baru menggunakan CMD yang dialihkan direktori utamanya ke direktori invorganizer dengan command "django-admin startproject invorganizer".
+   - Inisiasi projek Django baru menggunakan CMD yang dialihkan direktori utamanya ke direktori invorganizer dengan command "django-admin startproject invorganizer .".
    - Masuk ke direktori yang dibuat oleh command sebelumnya menggunakan CMD dan inisiasi virtual environment dengan command "py -m venv env".
    - Aktifkan virtual environment menggunakan command "env\Scripts\activate.bat".
    - Salin file requirements.txt dari tutorial 0 dan jalankan command "pip install -r requirements.txt".
