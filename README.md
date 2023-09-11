@@ -10,7 +10,7 @@ https://invorganizer.adaptable.app/
    - Salin file requirements.txt dari tutorial 0 dan jalankan command "pip install -r requirements.txt".
    - Jalankan command "django-admin startapp main" untuk membuat app baru bernama main.
    - Buka settings.py di dalam direktori invorganizer kemudian tambahkan 'main' dalam list INSTALLED_APPS.
-   - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html".
+   - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html" dan edit sesuai kebutuhan.
    - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.
    - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.
    - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
