@@ -4,17 +4,13 @@ https://invorganizer.adaptable.app/
 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
    - Membuat direktori baru (Contoh: "invorganizer").
-   - Inisiasi projek Django baru menggunakan CMD yang dialihkan direktori utamanya ke direktori invorganizer dengan command "django-admin startproject invorganizer".
+   - Inisiasi projek Django baru menggunakan CMD yang dialihkan direktori utamanya ke direktori invorganizer dengan command "django-admin startproject invorganizer .".
    - Masuk ke direktori yang dibuat oleh command sebelumnya menggunakan CMD dan inisiasi virtual environment dengan command "py -m venv env".
    - Aktifkan virtual environment menggunakan command "env\Scripts\activate.bat".
    - Salin file requirements.txt dari tutorial 0 dan jalankan command "pip install -r requirements.txt".
    - Jalankan command "django-admin startapp main" untuk membuat app baru bernama main.
-   - Buka settings.py di dalam direktori invorganizer kemudian tambahkan 'main' dalam list INSTALLED_APPS, import os dan ubah value STATIC_URL menjadi '/static/', dan tambahkan varianbel baru bernama "STATICFILES_DIRS" dengan value "[os.path.join(BASE_DIR, "static"),]". Penambahan kode yang berkaitan dengan static ini berguna agar main.html yang akan menjadi template bisa menggunakan style yang kita buat sendiri menggunakan file css.
-   - Buat direktori bernama "static" dan buat file bernama "styles.css".
-   - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html".
-   - Tambahkan kode berikut di main.html agar main.html menggunakan style yang telah dibuat sebelumnya.
-     <pre> {% load static %}
-      link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css" <pre>
+   - Buka settings.py di dalam direktori invorganizer kemudian tambahkan 'main' dalam list INSTALLED_APPS.
+   - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html" dan edit sesuai kebutuhan.
    - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.
    - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.
    - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
