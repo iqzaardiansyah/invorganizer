@@ -38,3 +38,16 @@ Agar dependensi pengembangan proyek bisa terjaga. Salah satu contoh penggunaan v
    - MVT (Model-View-Template) : Pola desain yang mirip dengan MVC, yang jadi pembeda adalah MVT menggunakan Framework untuk menggantika perkerjaan Controller pada MVC.
    - MVVM (Model-View-ViewModel) : Pola desain berbasis GUI yang berfokus pada pemisahan kode untuk logika dan tampilan aplikasi.
    Perbedaan utama antara ketiganya adalah bagaimana mereka mengatur komunikasi antara Model dan View serta pengelolaan logika aplikasi. MVC menggunakan Controller, MVT menggunakan Template, dan MVVM menggunakan ViewModel.
+
+5. Apa perbedaan antara form POST dan form GET dalam Django?<br>
+   Keduanya digunakan untuk transfer data dari klien ke server melalui protokol HTTP tetapi perbedaan utama antara POST dan GET adalah GET mentransfer parameter *request* dengan format URL *string* sedangkan POST mentransfer paramereter *request* dalam *message body* yang membuat transfer data dari klien ke server menjadi lebih aman.
+
+6. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?<br>
+   Perbedaan utama dari ketiga format ini adalah XML dan JSON digunakan untuk menyimpan dan mentransmisikan data sedangkan HTML digunakan untuk menampilkan data. Perbedaan utama antar XML dan JSON adalah kalau JSON merupakan turunan dari JavaScript sedangkan XML turunan dari SGML.
+
+7. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?<br>
+   - Dalam kebanyakan kasus, JSON sangat mudah untuk dibaca dibandingkan XML.
+   - JSON mempunyai ukuran berkas yang lebih kecil yang menyebabkan pengiriman data menggunkan JSON lebih cepat dibandingkan XML.
+
+8. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).<br>
+   - 
