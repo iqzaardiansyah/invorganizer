@@ -1,23 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<html style="color: white;">
+<html>
     <h1>InvOrganizer Page</h1>
     <h4>Name: {{name}} Class: {{class}}</h4>
 
     <hr>
 
-    <body style="background-color: grey;">
-        <style>
-            table, th, td {
-            padding-left: 10px;
-            padding-right: 10px;
-            border: 1px solid white;
-            border-collapse: collapse;
-            }
-            th, td {
-                background-color: grey;
-            }
-        </style>
+    <body>
         <p>Item Count : {{count}}</p>
         <table>
             <tr>
@@ -40,6 +29,12 @@
                 Add New Product
             </button>
         </a>
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
     </body>
 </html>
 {% endblock content %}

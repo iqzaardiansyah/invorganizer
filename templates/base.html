@@ -1,6 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color: white;">
+
+    <style>
+        table, th, td {
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1px solid white;
+        border-collapse: collapse;
+        }
+        th, td {
+            background-color: grey;
+        }
+    </style>
+
     <head>
         <meta charset="UTF-8" />
         <meta
@@ -11,7 +24,7 @@
         {% endblock meta %}
     </head>
 
-    <body>
+    <body style="background-color: grey;">
         {% block content %}
         {% endblock content %}
     </body>
