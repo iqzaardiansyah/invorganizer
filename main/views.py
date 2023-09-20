@@ -7,10 +7,12 @@ from django.core import serializers
 
 def show_main(request):
     list = Item.objects.all().order_by("name")
+    count = Item.objects.count()
     context = {
         'name': 'Iqza Ardiansyah',
         'class': 'PBP F',
-        'list' : list
+        'list' : list,
+        'count': count,
     }
 
     return render(request, "main.html", context)
