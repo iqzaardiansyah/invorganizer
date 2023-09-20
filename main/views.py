@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Item
 from django.http import HttpResponseRedirect, HttpResponse
 from main.forms import ItemForm
 from django.urls import reverse
+from .models import Item
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -72,13 +72,13 @@ def login_user(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        response = HttpResponseRedirect(reverse("main:show_main")) 
-        response.set_cookie('last_login', str(datetime.datetime.now()))
-        return response
-    else:
-        messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
     return render(request, 'login.html', context)
 
