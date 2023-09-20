@@ -7,7 +7,9 @@ from django.core import serializers
 
 def show_main(request):
     list = Item.objects.all().order_by("name")
-    count = Item.objects.count()
+    count = 0
+    for item in list:
+        count += item.amount
     context = {
         'name': 'Iqza Ardiansyah',
         'class': 'PBP F',
