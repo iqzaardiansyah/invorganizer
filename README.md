@@ -135,7 +135,7 @@
       - Tambahkan kode berikut ke `views.py` yang ada di direktori `main` agar aplikasi memiliki fitur login, logout, register, _cookies_, menampilkan nama pengguna, menampilkan sesi terakhir login, dan menampilkan Item spesifik untuk setiap pengguna.
       <pre>
       
-   ...
+      ...
       
       from django.shortcuts import redirect
       from django.contrib.auth.forms import UserCreationForm
@@ -143,7 +143,7 @@
       from django.contrib.auth import authenticate, login
       import datetime
    
-   ...
+      ...
    
       def show_main(request):
          list = Item.objects.all().filter(user=request.user)
@@ -156,7 +156,7 @@
            'last_login': request.COOKIES['last_login'],
          }
    
-   ...
+      ...
    
        def create_product(request):
          form = ItemForm(request.POST or None)
@@ -167,7 +167,7 @@
             item.save()
             return HttpResponseRedirect(reverse('main:show_main'))
    
-    ...
+      ...
    
       def register(request):
          form = UserCreationForm()
@@ -181,7 +181,7 @@
          context = {'form':form}
          return render(request, 'register.html', context)
    
-   ...
+      ...
    
       def login_user(request):
          if request.method == 'POST':
@@ -198,7 +198,7 @@
          context = {}
          return render(request, 'login.html', context)
    
-   ...
+      ...
    
       def logout_user(request):
          logout(request)
@@ -215,25 +215,25 @@
       
       from django.contrib.auth.decorators import login_required
    
-   ...
+      ...
    
       @login_required(login_url='/login')
       def show_main(request):
    
-   ...
+      ...
       
       </pre>
    
       - Tambahkan kode berikut ke dalam `models.py` pada direktori `main` agar Item yang ditampilkan spesifik untuk setiap pengguna.
       <pre>
       
-   ...
+      ...
       from django.contrib.auth.models import User
-   ...
+      ...
    
       class Item(models.Model):
          user = models.ForeignKey(User, on_delete=models.CASCADE)
-   ...
+      ...
       
       </pre>
    
