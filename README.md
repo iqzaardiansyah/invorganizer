@@ -130,113 +130,113 @@
    _Cookies_ sebenarnya bukan sebuah ancaman tetapi _cookies_ bisa digunakan oleh penjahat siber untuk _masquerading_, mengambil data finansial, mengakses akun pengguna, atau mencuri kata sandi pengguna yang tersimpan di browser.
 
    5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).<br>
-   - Buat file yang diperlukan untuk register, login, dan logout seperti `register.html` dan `login.html`.
-   - Isi `register.html` dan `login.html` dengan kode yang diberikan pada tutorial 3.
-   - Tambahkan kode berikut ke `views.py` yang ada di direktori `main` agar aplikasi memiliki fitur login, logout, register, _cookies_, menampilkan nama pengguna, menampilkan sesi terakhir login, dan menampilkan Item spesifik untuk setiap pengguna.
-   <pre>
+      - Buat file yang diperlukan untuk register, login, dan logout seperti `register.html` dan `login.html`.
+      - Isi `register.html` dan `login.html` dengan kode yang diberikan pada tutorial 3.
+      - Tambahkan kode berikut ke `views.py` yang ada di direktori `main` agar aplikasi memiliki fitur login, logout, register, _cookies_, menampilkan nama pengguna, menampilkan sesi terakhir login, dan menampilkan Item spesifik untuk setiap pengguna.
+      <pre>
+      
+   ...
+      
+      from django.shortcuts import redirect
+      from django.contrib.auth.forms import UserCreationForm
+      from django.contrib import messages
+      from django.contrib.auth import authenticate, login
+      import datetime
    
-...
+   ...
    
-   from django.shortcuts import redirect
-   from django.contrib.auth.forms import UserCreationForm
-   from django.contrib import messages
-   from django.contrib.auth import authenticate, login
-   import datetime
-
-...
-
-   def show_main(request):
-      list = Item.objects.all().filter(user=request.user)
-
-      context = {
-        'name': request.user.username,
-        'class': 'PBP F',
-        'list' : list,
-        'count': count,
-        'last_login': request.COOKIES['last_login'],
-      }
-
-...
-
-    def create_product(request):
-      form = ItemForm(request.POST or None)
-
-      if form.is_valid() and request.method == "POST":
-         item = form.save(commit=False)
-         item.user = request.user
-         item.save()
-         return HttpResponseRedirect(reverse('main:show_main'))
-
- ...
-
-   def register(request):
-      form = UserCreationForm()
-
-      if request.method == "POST":
-         form = UserCreationForm(request.POST)
-         if form.is_valid():
-               form.save()
-               messages.success(request, 'Your account has been successfully created!')
-               return redirect('main:login')
-      context = {'form':form}
-      return render(request, 'register.html', context)
-
-...
-
-   def login_user(request):
-      if request.method == 'POST':
-         username = request.POST.get('username')
-         password = request.POST.get('password')
-         user = authenticate(request, username=username, password=password)
-         if user is not None:
-            login(request, user)
-            response = HttpResponseRedirect(reverse("main:show_main")) 
-            response.set_cookie('last_login', str(datetime.datetime.now()))
-            return response
-         else:
-            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
-      context = {}
-      return render(request, 'login.html', context)
-
-...
-
-   def logout_user(request):
-      logout(request)
-      response = HttpResponseRedirect(reverse('main:login'))
-      response.delete_cookie('last_login')
-      return response
-
-   </pre>
-
-   - Impor fungsi-fungsi yang telah dibuat dan tambahkan _path url_ ke `urlpatterns` untuk mengakses fungsi yang telah dibuat pada file `urls.py` dalam direktori `main`.
-
-   - Tambahkan kode berikut ke dalam `views.py` dalam direktori `main`  agar aplikasi yang dibuat hanya bisa digunakan oleh pengguna yang sudah diautentikasi.
-   <pre>
+      def show_main(request):
+         list = Item.objects.all().filter(user=request.user)
    
-   from django.contrib.auth.decorators import login_required
-
-...
-
-   @login_required(login_url='/login')
-   def show_main(request):
-
-...
+         context = {
+           'name': request.user.username,
+           'class': 'PBP F',
+           'list' : list,
+           'count': count,
+           'last_login': request.COOKIES['last_login'],
+         }
    
-   </pre>
-
-   - Tambahkan kode berikut ke dalam `models.py` pada direktori `main` agar Item yang ditampilkan spesifik untuk setiap pengguna.
-   <pre>
+   ...
    
-...
-   from django.contrib.auth.models import User
-...
-
-   class Item(models.Model):
-      user = models.ForeignKey(User, on_delete=models.CASCADE)
-...
+       def create_product(request):
+         form = ItemForm(request.POST or None)
    
-   </pre>
-
-   - Aktifkan _virtual environment_ dan lakukan `python manage.py makemigrations` dan `python manage.py migrate`.
+         if form.is_valid() and request.method == "POST":
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+   
+    ...
+   
+      def register(request):
+         form = UserCreationForm()
+   
+         if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                  form.save()
+                  messages.success(request, 'Your account has been successfully created!')
+                  return redirect('main:login')
+         context = {'form':form}
+         return render(request, 'register.html', context)
+   
+   ...
+   
+      def login_user(request):
+         if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+               login(request, user)
+               response = HttpResponseRedirect(reverse("main:show_main")) 
+               response.set_cookie('last_login', str(datetime.datetime.now()))
+               return response
+            else:
+               messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+         context = {}
+         return render(request, 'login.html', context)
+   
+   ...
+   
+      def logout_user(request):
+         logout(request)
+         response = HttpResponseRedirect(reverse('main:login'))
+         response.delete_cookie('last_login')
+         return response
+   
+      </pre>
+   
+      - Impor fungsi-fungsi yang telah dibuat dan tambahkan _path url_ ke `urlpatterns` untuk mengakses fungsi yang telah dibuat pada file `urls.py` dalam direktori `main`.
+   
+      - Tambahkan kode berikut ke dalam `views.py` dalam direktori `main`  agar aplikasi yang dibuat hanya bisa digunakan oleh pengguna yang sudah diautentikasi.
+      <pre>
+      
+      from django.contrib.auth.decorators import login_required
+   
+   ...
+   
+      @login_required(login_url='/login')
+      def show_main(request):
+   
+   ...
+      
+      </pre>
+   
+      - Tambahkan kode berikut ke dalam `models.py` pada direktori `main` agar Item yang ditampilkan spesifik untuk setiap pengguna.
+      <pre>
+      
+   ...
+      from django.contrib.auth.models import User
+   ...
+   
+      class Item(models.Model):
+         user = models.ForeignKey(User, on_delete=models.CASCADE)
+   ...
+      
+      </pre>
+   
+      - Aktifkan _virtual environment_ dan lakukan `python manage.py makemigrations` dan `python manage.py migrate`.
 
 </details>
