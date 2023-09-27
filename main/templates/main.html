@@ -18,9 +18,19 @@
             {% for produk in list %}
             <tr>
                 <td><h4>{{produk.name}}</h4></td>
-                <td><h4>{{produk.amount}}</h4></td>
+                <td><h4><form action="{% url 'main:indecrement' id=produk.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="increment"><i class="fa fa-trash">+</i></button>
+                 </form>{{produk.amount}}<form action="{% url 'main:indecrement' id=produk.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="decrement"><i class="fa fa-trash">-</i></button>
+                 </form></h4></td>
                 <td><h4>{{produk.price}}</h4></td>
                 <td><h4>{{produk.description}}</h4></td>
+                <td><h4><form action="{% url 'main:remove' id=produk.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" ><i class="fa fa-trash">Remove</i></button>
+                 </form></h4></td>
             </tr>
             {% endfor %}
         </table>

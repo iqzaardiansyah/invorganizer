@@ -87,3 +87,25 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def remove(request, id = None):
+    object = Item.objects.get(pk = id)
+    context = {'item' : object}
+    if request.method == 'GET':
+        return render(request, '/', context)
+    elif request.method == 'POST':
+        object.delete()
+        return redirect('/')
+    
+def indecrement(request, id = None):
+    object = Item.objects.get(pk = id)
+    context = {'item' : object}
+    if 'increment' in request.POST:
+        object.amount += 1
+    elif 'decrement' in request.POST:
+        if object.amount != 0:
+            object.amount -= 1
+    elif request.method == 'GET' :
+        return render(request, '/', context)
+    object.save()
+    return redirect('/')
