@@ -103,7 +103,7 @@ def indecrement(request, id = None):
     if 'increment' in request.POST:
         object.amount += 1
     elif 'decrement' in request.POST:
-        if object.amount != 0:
+        if object.amount > 1:
             object.amount -= 1
     elif request.method == 'GET' :
         return render(request, '/', context)

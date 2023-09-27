@@ -27,7 +27,10 @@
         {% endblock meta %}
     </head>
 
-    <body style="background-color: grey;">
+    <body>
+        <style>
+            body {background-image: linear-gradient(to right, black, grey, white); font-family: 'Courier New', Courier, monospace;}
+        </style>
         {% block content %}
         {% endblock content %}
     </body>
