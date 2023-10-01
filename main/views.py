@@ -13,16 +13,17 @@ import datetime
 
 @login_required(login_url='/login')
 def show_main(request):
-    list = Item.objects.all().filter(user=request.user)
+    list = Item.objects.all().filter(user=request.user).order_by('name')
     count = 0
     for item in list:
         count += item.amount
     context = {
-        'name': request.user.username,
+        'name': 'Iqza Ardiansyah',
         'class': 'PBP F',
         'list' : list,
         'count': count,
         'last_login': request.COOKIES['last_login'],
+        'user':request.user.username,
     }
 
     return render(request, "main.html", context)
@@ -88,24 +89,34 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-def remove(request, id = None):
-    object = Item.objects.get(pk = id)
-    context = {'item' : object}
-    if request.method == 'GET':
-        return render(request, '/', context)
-    elif request.method == 'POST':
-        object.delete()
-        return redirect('/')
+def remove(request, id):
+    product = Item.objects.get(pk = id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
     
-def indecrement(request, id = None):
+def decrement(request, id = None):
     object = Item.objects.get(pk = id)
-    context = {'item' : object}
-    if 'increment' in request.POST:
-        object.amount += 1
-    elif 'decrement' in request.POST:
-        if object.amount > 1:
-            object.amount -= 1
-    elif request.method == 'GET' :
-        return render(request, '/', context)
+    object.amount -= 1
     object.save()
-    return redirect('/')
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def increment(request, id = None):
+    object = Item.objects.get(pk = id)
+    object.amount += 1
+    object.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+
+def BacktoMain(request):
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def edit_product(request, id):
+    object = Item.objects.get(pk = id)
+    form = ItemForm(request.POST or None, instance=object)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)

@@ -238,5 +238,93 @@
       </pre>
    
       - Aktifkan _virtual environment_ dan lakukan `python manage.py makemigrations` dan `python manage.py migrate`.
+</details>
+
+<details>
+
+   <summary>Tugas 5</summary>
+
+   1. Jelaskan manfaat dari setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya.<br>
+   _Element selector_ dalam CSS digunakan untuk mengubah properti semua elemen yang memiliki tag HTML yang sama. Ada beberapa manfaat dalam menggunakan setiap _element selector_, dan waktu yang tepat untuk menggunakannya ketika dalam pengembangan aplikasi dibutuhkan properti yang berbeda-beda berdasarkan tag HTML-nya.
+
+   2. Jelaskan HTML5 Tag yang kamu ketahui.<br>
+      * !DOCTYPE : Tag untuk menentukan tipe dokumen.
+      * html : Tag untuk membuat sebuah dokumen HTML.
+      * title : Tag untuk membuat judul dari sebuah halaman.
+      * body : Tag untuk membuat tubuh dari sebuah halaman.
+      * h1 to h6 : Tag untuk membuat heading.
+      * p : Tag untuk membuat paragraf.
+      * br : Memasukan satu baris putus.
+      * hr : Tag untuk membuat perubahan dasar kata di dalam isi.
+      * !--...-- : Tag untuk membuat komentar.
+
+   3. Jelaskan perbedaan antara _margin_ dan _padding_.<br>
+      * _Margin_ : Ruang di luar elemen, yang berarti itu adalah jarak antara elemen tersebut dan elemen-elemen lain di sekitarnya. _Margin_ digunakan untuk mengontrol jarak antara elemen dengan elemen-elemen lain di luar elemen tersebut.
+      * _Padding_ : Ruang di dalam elemen, yang berarti itu adalah jarak antara batas elemen dan konten di dalamnya. _Padding_ digunakan untuk mengatur jarak antara konten elemen dan batas elemen itu sendiri.
+
+   4. Jelaskan perbedaan antara _framework_ CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+      * Bootstrap adalah framework CSS yang sudah dirancang dengan gaya yang sudah ditentukan (_pre-designed_). Ini berarti Bootstrap menyediakan komponen dan gaya bawaan yang siap digunakan, sehingga memungkinkan Anda membangun situs web dengan cepat tanpa banyak penyesuaian. Bootstrap sebaiknya digunakan jika diperlukan tampilan yang cepat & mudah tanpa banyak kustomisasi, ingin membangun prototipe dengan cepat, dan tidak memiliki waktu atau kebutuhan untuk membangun desain kustom dari nol.
+      * Tailwind menyediakan banyak kelas CSS yang fleksibel, seperti `.bg-blue-500`, `.p-4`, atau `.flex`. Tailwind lebih cocok untuk kustomisasi yang mendalam karena Tailwind dapat membangun desain dari awal dengan menggunakan kelas-kelas utilitas yang ada. Tailwind sebaiknya digunakan jika diinginkan desain yang sangat kustom dan sesuai dengan kebutuhan proyek.
+   5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+      * Tambahkan _method `remove`_ yang berguna untuk menghapus objek yang telah dibuat, _method `decrement`_ & _`increment`_ yang berguna untuk mengubah _field amount_ suatu objek, *method `edit_product`* yang berguna untuk mengedit suatu objek, dan *method `BacktoMain`* yang berguna untuk kembali ke halaman utama ketika menekan judul halaman yang terletak di NavBar.<br>
+         <pre>
+            ...
+            def remove(request, id):
+               product = Item.objects.get(pk = id)
+               product.delete()
+               return HttpResponseRedirect(reverse('main:show_main'))
+            
+            def decrement(request, id = None):
+               object = Item.objects.get(pk = id)
+               object.amount -= 1
+               object.save()
+               return HttpResponseRedirect(reverse('main:show_main'))
+            
+            def increment(request, id = None):
+               object = Item.objects.get(pk = id)
+               object.amount += 1
+               object.save()
+               return HttpResponseRedirect(reverse('main:show_main'))
+            
+            def BacktoMain(request):
+               return HttpResponseRedirect(reverse('main:show_main'))
+            
+            def edit_product(request, id):
+               object = Item.objects.get(pk = id)
+               form = ItemForm(request.POST or None, instance=object)
+               if form.is_valid() and request.method == "POST":
+                  form.save()
+                  return HttpResponseRedirect(reverse('main:show_main'))
+               context = {'form': form}
+               return render(request, "edit_product.html", context)
+         </pre>
+      * Tambahkan *method-method* yang baru dibuat ke `views.py`.
+         <pre>
+            ...
+            from main.views import *
+            ...
+            urlpatterns = [
+               path('', show_main, name='show_main'),
+               path('create-product', create_product, name='create_product'),
+               path('xml/', show_xml, name='show_xml'), 
+               path('json/', show_json, name='show_json'), 
+               path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+               path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
+               path('register/', register, name='register'),
+               path('login/', login_user, name='login'),
+               path('logout/', logout_user, name='logout'),
+               path('remove/<int:id>', remove, name="remove"),
+               path('decrement/<int:id>', decrement, name='decrement'),
+               path('edit-product/<int:id>', edit_product, name='edit_product'),
+               path('backtomain/', BacktoMain, name='backtomain'),
+               path('increment/<int:id>', increment, name='increment'),
+            ]
+         </pre>
+      * Inisiasi Bootstrap CSS dan juga JS dengan menambahkan beberapa kode ke *`base.html`*.
+      * Inisiasi NavBar pada *`base.html`* dan buat _block_ baru pada NavBar agar setiap halaman bisa memiliki properti NavBar-nya masing-masing
+      * Pindahkan tombol _logout_ ke NavBar.
+      * Tambahkan beberapa tombol pada *_main.html_* untuk menggunakan _method-method_ yang baru dibuat.
+      * Ubah _table_ yang digunakan sebelumnya menjadi _card_.
+      * Kustomisasi _card_ menggunakan tag _style_.
 
 </details>

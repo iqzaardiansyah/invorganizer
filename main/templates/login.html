@@ -10,6 +10,14 @@
 
     <h1>Login</h1>
 
+    <style>
+        *
+        {
+        text-align: center !important;
+        margin: auto !important;
+        }
+    </style>
+
     <form method="POST" action="">
         {% csrf_token %}
         <table>
@@ -25,10 +33,11 @@
 
             <tr>
                 <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
+                <td><input class="btn login_btn" type="submit" value="Login" style="color: black; background-color: white;"></td>
             </tr>
         </table>
     </form>
+
 
     {% if messages %}
         <ul>
