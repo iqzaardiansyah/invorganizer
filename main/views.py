@@ -96,7 +96,8 @@ def remove(request, id):
     
 def decrement(request, id = None):
     object = Item.objects.get(pk = id)
-    object.amount -= 1
+    if object.amount > 1:
+        object.amount -= 1
     object.save()
     return HttpResponseRedirect(reverse('main:show_main'))
 
