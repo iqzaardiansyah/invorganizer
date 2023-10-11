@@ -17,6 +17,8 @@ RUN addgroup --system django \
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements.txt /requirements.txt
+RUN python -m venv env
+RUN ./env/Scripts/activate.bat
 RUN pip install -r /requirements.txt
 
 # Copy project code
