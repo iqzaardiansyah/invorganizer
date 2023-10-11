@@ -7,45 +7,47 @@
 
       - Membuat direktori baru (Contoh: "invorganizer").<br>
       - Inisiasi projek Django baru menggunakan CMD yang dialihkan direktori utamanya ke direktori invorganizer dengan command.<br>
-      <pre>
-         django-admin startproject invorganizer 
-      </pre>
+         <pre>
+            django-admin startproject invorganizer 
+         </pre>
       - Masuk ke direktori yang dibuat oleh command sebelumnya menggunakan CMD dan inisiasi virtual environment dengan command.<br>
-      <pre>
-         python -m venv env
-      </pre>
+         <pre>
+            python -m venv env
+         </pre>
       - Aktifkan virtual environment menggunakan command.<br>
-      <pre>
-         env\Scripts\activate.bat
-      </pre>
+         <pre>
+            env\Scripts\activate.bat
+         </pre>
       - Salin file requirements.txt dari tutorial 0 dan jalankan command.<br>
-      <pre>
-         pip install -r requirements.txt
-      </pre>
+         <pre>
+            pip install -r requirements.txt
+         </pre>
       - Buat app baru bernama main menggunakan command.<br>
-      <pre>
-         django-admin startapp main
-      </pre>
+         <pre>
+            django-admin startapp main
+         </pre>
       - Buka settings.py di dalam direktori invorganizer kemudian tambahkan 'main' dalam list INSTALLED_APPS.<br>
       - Buat direktori dalam direktori main bernama "templates" dan buat file bernama "main.html" dan edit sesuai kebutuhan.<br>
       - Edit models.py dalam direktori main dan tambahkan class Item(models.Model) dengan atribut name sebagai nama item dengan tipe CharField, amount sebagai jumlah item dengan tipe IntegerField, description sebagai deskripsi item dengan tipe TextField, dan price sebagai harga item dengan tipe IntegerField.<br>
       - Edit views.py agar menampilkan nama aplikasi, nama mahasiswa, dan kelas sesuai dengan tutorial 1.<br>
       - Buat file bernama "urls.py" dalam direktori main dan isi dengan kode.<br>
-      <pre>from django.urls import path
-      from main.views import show_main
-      app_name = 'main'
-      urlpatterns = [
-         path('', show_main, name='show_main'),
-      ] </pre>
+         <pre>
+            from django.urls import path
+            from main.views import show_main
+            app_name = 'main'
+            urlpatterns = [
+               path('', show_main, name='show_main'),
+            ] 
+         </pre>
       - Buat Repo baru di github dan salin link HTTPS Repo tersebut.<br>
       - Inisiasi git folder pada direktori project menggunakan CMD dengan command.<br>
-      <pre>
-         git init
-      </pre>
+         <pre>
+            git init
+         </pre>
       - Kemudian hubungkan direktori project dengan Repo yang telah dubuat dengan command.<br>
-      <pre>
-         git remote add origin {link Repo}
-      </pre>
+         <pre>
+            git remote add origin {link Repo}
+         </pre>
       - Push direktori project ke Repo dengan menggunakan mantra git yaitu add, commit, dan push.<br>
       - Buka website adaptable, sign in, dan buat app baru bernama invorganizer dengan mengikuti langkah-langkah pada tutorial 0.<br>
    
@@ -326,5 +328,94 @@
       * Tambahkan beberapa tombol pada *_main.html_* untuk menggunakan _method-method_ yang baru dibuat.
       * Ubah _table_ yang digunakan sebelumnya menjadi _card_.
       * Kustomisasi _card_ menggunakan tag _style_.
+
+</details>
+
+<details>
+   <summary>Tugas 6</summary>
+
+   1. Jelaskan perbedaan antara _asynchronous programming_ dengan _synchronous programming_.<br>
+   _Asynchronous programming_ memungkinkan beberapa proses berjalan di saat yang sama tanpa harus menunggu proses lain selesai. Sedangkan _synchronous programming_ mengeksekusi proses satu per satu dengan urutan tertentu.
+
+   2. Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma _event-driven programming_. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.<br>
+   _Event-driven programming_ metode proramming yang dimana jalannya program ditentukan oleh _events_ yang terjadi. Metode ini dapat menghasilkan program yang lebih responsif karena program tidak terus berjalan secara konstan. Salah satu penerapan _event-driven programming_ pada tugas ini adalah tombol yang memanggil suatu modal AJAX ketika diklik.
+
+   3. Jelaskan penerapan _asynchronous programming_ pada AJAX.<br>
+   Ketika permintaan AJAX dikirim, bagian _header_ dan _body_ yang mengandung informasi ke server. Server akan memproses permintaan yang dikirim dan mengirimkan respon dari permentaan tersebut kembali ke klien. Penerapan ini memungkinkan JavaScript melakukan pertukaran data dan memproses hal lain yang membuat halaman lebih responsif.
+
+   4. Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada _library_ jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.<br>
+   Fetch API lebih baik digunakan karena _syntax_ lebih simpel, mudah digunakan, dan Fetch API bisa dibilang masih tergolong baru yang memungkinkan Fetch API berjalan pada peramban modern.
+      <table border=1>
+         <tr>
+            <th>Properties</th>
+            <th>Fetch API</th>
+            <th>jQuery</th>
+         </tr>
+         <tr>
+            <td>Architecture</td>
+            <td>Promise based</td>
+            <td>Event Based</td>
+         </tr>
+         <tr>
+            <td>Complexity</td>
+            <td>Easy</td>
+            <td>Complex</td>
+         </tr>
+         <tr>
+            <td>Syntax</td>
+            <td>Simple</td>
+            <td>Verbose</td>
+         </tr>
+         <tr>
+            <td>Request / Response</td>
+            <td>Supports</td>
+            <td>Supports but complex structure</td>
+         </tr>
+         <tr>
+            <td>Cookies</td>
+            <td>Send cookies</td>
+            <td>Cookieless</td>
+         </tr>
+      </table>
+
+   5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara _step-by-step_ (bukan hanya sekadar mengikuti tutorial).<br>
+      * Tambahkan fungsi `get_product_json`, `add_product_ajax`, dan `delete_product_ajax` pada `views.py`.
+         <pre>
+            ...
+
+            def get_product_json(request):
+               product_item = Item.objects.filter(user=request.user).order_by("name")
+               return HttpResponse(serializers.serialize('json', product_item))
+
+            @csrf_exempt
+            def add_product_ajax(request):
+               if request.method == 'POST':
+                  name = request.POST.get("name")
+                  price = request.POST.get("price")
+                  amount = request.POST.get("amount")
+                  description = request.POST.get("description")
+                  user = request.user
+
+                  new_product = Item(name=name, price=price, description=description, amount=amount, user=user)
+                  new_product.save()
+
+                  return HttpResponse(b"CREATED", status=201)
+
+               return HttpResponseNotFound()
+
+            @csrf_exempt
+            def delete_product_ajax(request):
+               if request.method == 'POST':
+                  id = request.POST.get("delete")
+                  item = Item.objects.get(pk = id)
+
+                  item.delete()
+                  return HttpResponse(b"DELETED", status=201)
+               return HttpResponseNotFound()
+         </pre>
+      * Tambahkan _path url_ untuk menggunakan fungsi yang baru dibuat pada _urlpatterns_ di file `urls.py`.
+      * Tambahkan _script_ dalam `main.html` dengan kode yang sama seperti di tutorial tetapi ditambahkan fungsi baru untuk menghapus objek dan menginisiasi _card_ untuk menampilkan objek.
+      * Buka _command prompt_ pada folder root dan jalankan _virtual environment_.
+      * Jalankan _command_ `py manage.py makemigrations` kemudian jalankan _command_ `py manage.py migrate`.
 
 </details>

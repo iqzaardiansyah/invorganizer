@@ -104,8 +104,6 @@
         button {
             --color: #0077ff;
             display: inline-block;
-            width: 100px;
-            height: 25px;
             line-height: 2.5em;
             overflow: hidden;
             font-size: 10px;
@@ -167,52 +165,137 @@
     <hr>
 
     <body>
-        <p>Item Count : {{count}}</p>
-        {% for produk in list %}
-        <div class="myCard">
-            <div class="innerCard">
-                <div class="frontSide">
-                    <p class="title">{{produk.name}}</p>
-                </div>
-                <div class="backSide">
-                    <p>Jumlah Produk: 
-                        <a href="{% url 'main:decrement' produk.id %}">
-                            <button class="tambahkurang">
-                                -
-                            </button>
-                        </a> 
-                        {{produk.amount}}
-                        <a href="{% url 'main:increment' produk.id %}">
-                            <button class="tambahkurang">
-                                +
-                            </button>
-                        </a> 
-                    </p>
-                    <p>Harga Produk: {{produk.price}}</p>
-                    <p>Deskripsi Produk: {{produk.description}}</p>
-                    <a href="{% url 'main:remove' produk.id %}">
-                        <button class="red">
-                            Remove
-                        </button>
-                    </a>
-                    <a href="{% url 'main:edit_product' produk.id %}">
-                        <button>
-                            Edit
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+        <p id="counter"></p>
+        <div id="product_table"></div>
         <a href="{% url 'main:create_product' %}">
             <button>
                 Add New Product
             </button>
         </a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModaldelete" style="background-color: #ff0000;">Delete Product by AJAX</button>
         <h6>Sesi terakhir login: {{ last_login }}</h6>
     </body>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModaldelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formdelete" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Item:</label>
+                            <select id="delete" name="delete" class="form-control-sm custom-select">
+                                <option selected disabled>Choose Item</option>
+                                {% for item in list %}
+                                <option id="selected" name="selected" value="{{item.id}}">{{item.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_delete" data-bs-dismiss="modal" style="background-color: #ff0000;">Delete Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+ 
+        async function refreshProducts() {
+            document.getElementById("product_table").innerHTML = ""
+            const products = await getProducts()
+            var count = 0
+            let htmlString = ``
+            products.forEach((item) => {
+                htmlString += `
+                                <div class="myCard">
+                                    <div class="innerCard">
+                                        <div class="frontSide">
+                                            <p class="title">${item.fields.name}</p>
+                                        </div>
+                                        <div class="backSide">
+                                            <p>Jumlah Produk:  ${item.fields.amount}</p>
+                                            <p>Harga Produk: ${item.fields.price}</p>
+                                            <p>Deskripsi Produk: ${item.fields.description}</p>
+                                        </div>
+                                    </div>
+                                </div>`
+                count += item.fields.amount
+            })
+            
+            document.getElementById("counter").innerHTML = 'Item Count : ' + count
+            document.getElementById("product_table").innerHTML = htmlString
+        }
+
+    refreshProducts()
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        return false
+    }
+    document.getElementById("button_add").onclick = addProduct
+
+    function deleteProduct() {
+        fetch("{% url 'main:delete_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#formdelete')),
+        }).then(refreshProducts)
+
+        document.getElementById("formdelete").reset()
+        return false
+    }
+    document.getElementById("button_delete").onclick = deleteProduct
+    </script>
+
 </html>
 {% endblock content %}
-
-
-
