@@ -10,8 +10,3 @@ class Item(models.Model):
 
     def __str__(self) :
         return self.name
-    
-class Employee(models.Model):
-    name = models.CharField(default='', max_length=255)
-    age = models.IntegerField(default=0)
-    hobby = models.TextField(default='')
