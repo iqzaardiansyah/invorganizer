@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
 
 @csrf_exempt
 def login(request):
@@ -46,4 +47,21 @@ def logout(request):
         return JsonResponse({
         "status": False,
         "message": "Logout gagal."
+        }, status=401)
+    
+def register(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    try:
+        user = User.objects.create_user(username, password)
+        user.save()
+        return JsonResponse({
+            "username": username,
+            "status": True,
+            "message": "Register berhasil!"
+        }, status=200)
+    except:
+        return JsonResponse({
+            "status": False,
+            "message": "Register gagal."
         }, status=401)

@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse, JsonResponse
-from main.forms import ItemForm
+from .forms import ItemForm
 from django.urls import reverse
 from .models import Item
 from django.core import serializers
