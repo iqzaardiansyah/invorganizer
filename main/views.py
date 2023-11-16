@@ -156,12 +156,11 @@ def delete_product_ajax(request):
 @csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
-        
         data = json.loads(request.body)
-
         new_product = Item.objects.create(
             user = request.user,
             name = data["name"],
+            amount = int(data["amount"]),
             price = int(data["price"]),
             description = data["description"]
         )
