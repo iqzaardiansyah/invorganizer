@@ -46,3 +46,29 @@ def logout(request):
         "status": False,
         "message": "Logout gagal."
         }, status=401)
+    
+csrf_exempt
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+
+        try:
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.save()
+            return JsonResponse({
+                "username": user.username,
+                "status": True,
+                "message": "Registration successful!"
+            }, status=200)
+        except:
+            return JsonResponse({
+                "status": False,
+                "message": "Registration failed."
+            }, status=401)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "Invalid request method."
+            }, status=401)
