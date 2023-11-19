@@ -82,7 +82,10 @@ def login_user(request):
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
-    return render(request, 'login.html', context)
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("main:show_main"))
+    else:
+        return render(request, 'login.html', context)
 
 def logout_user(request):
     logout(request)
@@ -170,7 +173,8 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
-    
+
+@csrf_exempt  
 def show_json_user(request):
     data = Item.objects.all().filter(user = request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
