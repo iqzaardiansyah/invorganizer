@@ -135,9 +135,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://iqza-ardiansyah-tutorial.pbp.cs.ui.ac.id']
-CSRF_ALLOWED_ORIGINS = ['https://iqza-ardiansyah-tutorial.pbp.cs.ui.ac.id']
-CORS_ORIGINS_WHITELIST = ['https://iqza-ardiansyah-tutorial.pbp.cs.ui.ac.id']
+CSRF_TRUSTED_ORIGINS = ['https://iqza-ardiansyah-tugas.pbp.cs.ui.ac.id']
+CSRF_ALLOWED_ORIGINS = ['https://iqza-ardiansyah-tugas.pbp.cs.ui.ac.id']
+CORS_ORIGINS_WHITELIST = ['https://iqza-ardiansyah-tugas.pbp.cs.ui.ac.id']
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
