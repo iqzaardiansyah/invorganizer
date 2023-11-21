@@ -47,7 +47,7 @@ def logout(request):
         "message": "Logout gagal."
         }, status=401)
     
-csrf_exempt
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
