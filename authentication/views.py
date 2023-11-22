@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
+from itsdangerous import Serializer
+from main.models import Item
 
+userr = None
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
@@ -14,6 +17,7 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
+                userr = user
                 # Status login sukses.
                 return JsonResponse({
                     "username": user.username,
@@ -39,6 +43,7 @@ def logout(request):
 
     try:
         auth_logout(request)
+        userr = None
         return JsonResponse({
             "username": username,
             "status": True,
@@ -74,3 +79,7 @@ def register(request):
                 "status": False,
                 "message": "Invalid request method."
             }, status=401)
+    
+def show_json_user(request):
+    data = Item.objects.all().filter(user = userr)
+    return HttpResponse(Serializer.serialize("json", data), content_type="application/json")
