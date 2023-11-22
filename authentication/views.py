@@ -81,5 +81,5 @@ def register(request):
             }, status=401)
     
 def show_json_user(request):
-    data = Item.objects.all().filter(user = userr)
+    data = Item.objects.filter(user = userr)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
