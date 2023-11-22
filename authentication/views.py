@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
 
+@csrf_exempt
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
