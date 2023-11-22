@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
-from itsdangerous import Serializer
+from django.core import serializers
 from main.models import Item
 
 userr = None
@@ -82,4 +82,4 @@ def register(request):
     
 def show_json_user(request):
     data = Item.objects.all().filter(user = userr)
-    return HttpResponse(Serializer.serialize("json", data), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
